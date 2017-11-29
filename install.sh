@@ -16,8 +16,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cp chroot_install.sh /mnt/root
 arch-chroot /mnt /root/chroot_install.sh
 
+rm -f /mnt/root/chroot_install.sh
 umount -R /mnt
-rm /mnt/root/chroot_install.sh
 
 echo "Installation completed. Please reboot (systemctl reboot)"
 
