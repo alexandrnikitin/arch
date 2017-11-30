@@ -1,0 +1,16 @@
+---
+- name: install ansible with pacman
+  tags:
+    - tools
+    - ansible
+  pacman:
+    name: "ansible"
+    state: present
+
+- name: install wireshark with pacman
+  tags:
+    - tools
+    - wireshark
+  pacman:
+    name: "wireshark-gtk"
+    state: present

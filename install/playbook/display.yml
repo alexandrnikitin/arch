@@ -1,0 +1,10 @@
+---
+- hosts: all
+  roles:
+    - display
+  become: yes
+  become_method: sudo
+  become_user: root
+  vars_files:
+    - conf/common.yml
+    - conf/{{ inventory_hostname }}.yml
