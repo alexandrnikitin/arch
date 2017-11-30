@@ -5,13 +5,13 @@ timedatectl set-ntp true
 parted /dev/sda -s "mklabel msdos"
 parted /dev/sda -s "mkpart primary ext4 0% 100%"
 parted /dev/sda -s "set 1 boot on"
-mkfs.ext4 /dev/sda1
+mkfs.ext4 -O metadata_csum /dev/sda1
 
 mount /dev/sda1 /mnt
 
 pacstrap /mnt base
 genfstab -U /mnt >> /mnt/etc/fstab
-#sed -r -e 's#rw,relatime,data=ordered#defaults,noatime,discard#g' -i /mnt/etc/fstab
+sed -r -e 's#rw,relatime,data=ordered#rw,noatime,data=ordered,commit=60,barrier=0#g' -i /mnt/etc/fstab
 
 cp chroot_install.sh /mnt/root
 arch-chroot /mnt /root/chroot_install.sh
