@@ -7,6 +7,8 @@ parted /dev/sda -s "mkpart primary ext4 0% 100%"
 parted /dev/sda -s "set 1 boot on"
 mkfs.ext4 -O metadata_csum /dev/sda1
 
+# TODO encrypt filesystem
+
 mount /dev/sda1 /mnt
 
 pacstrap /mnt base
