@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 timedatectl set-ntp true
 
@@ -15,9 +16,9 @@ pacstrap /mnt base
 genfstab -U /mnt >> /mnt/etc/fstab
 sed -r -e 's#rw,relatime,data=ordered#rw,noatime,data=ordered,commit=60,barrier=0#g' -i /mnt/etc/fstab
 
-cp chroot_install.sh /mnt/root
-arch-chroot /mnt /root/chroot_install.sh
-rm -f /mnt/root/chroot_install.sh
+cp install_chroot.sh /mnt/root
+arch-chroot /mnt /root/install_chroot.sh
+rm -f /mnt/root/install_chroot.sh
 
 umount -R /mnt
 
