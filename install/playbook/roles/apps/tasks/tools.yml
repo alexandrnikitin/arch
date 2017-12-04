@@ -6,11 +6,3 @@
   pacman:
     name: "ansible"
     state: present
-
-- name: install wireshark with pacman
-  tags:
-    - tools
-    - wireshark
-  pacman:
-    name: "wireshark-gtk"
-    state: present
