@@ -31,4 +31,9 @@ mkswap /swapfile
 echo "/swapfile none swap defaults 0 0" >> /etc/fstab
 echo "vm.swappiness=10" >> /etc/sysctl.d/99-sysctl.conf
 
+pacman -S --noconfirm base-devel
+pacman -S --noconfirm xorg xf86-video-vesa xf86-input-mouse xf86-input-keyboard
+pacman -S --noconfirm openssh virtualbox-guest-modules-arch
+
 systemctl enable dhcpcd.service
+systemctl enable sshd.service
