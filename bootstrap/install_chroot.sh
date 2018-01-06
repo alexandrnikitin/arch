@@ -32,8 +32,9 @@ echo "/swapfile none swap defaults 0 0" >> /etc/fstab
 echo "vm.swappiness=10" >> /etc/sysctl.d/99-sysctl.conf
 
 pacman -S --noconfirm base-devel python
-pacman -S --noconfirm xorg xf86-video-vesa xf86-input-mouse xf86-input-keyboard
-pacman -S --noconfirm openssh virtualbox-guest-modules-arch
+pacman -S --noconfirm xorg-server xorg-xinit xorg-apps
+pacman -S --noconfirm xf86-video-vesa xf86-input-mouse xf86-input-keyboard
+pacman -S --noconfirm openssh virtualbox-guest-utils virtualbox-guest-modules-arch
 
 systemctl enable dhcpcd.service
 systemctl enable sshd.service
