@@ -36,7 +36,7 @@ mkswap /swapfile
 echo "/swapfile none swap defaults 0 0" >> /etc/fstab
 echo "vm.swappiness=10" >> /etc/sysctl.d/99-sysctl.conf
 
-pacman -S --noconfirm openssh
+pacman -S --noconfirm sudo openssh
 
 systemctl enable dhcpcd.service
 systemctl enable sshd.service
