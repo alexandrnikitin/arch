@@ -2,25 +2,30 @@
 set -e
 
 ROOT_PASSWORD="password"
-TIMEZONE="Europe/Vilnius"
-LOCALE="en_US.UTF-8"
+USER_NAME="anikitin"
+USER_PASSWORD="password"
 HOSTNAME="arch"
+TIMEZONE="US/Pacific"
+LOCALE="en_US.UTF-8"
 LANG="en_US.UTF-8"
 
-ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
+ln -sf "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
 hwclock --systohc
 
-sed -i '/^#$LOCALE /s/^#//' /etc/locale.gen
+sed -i "/^#$LOCALE /s/^#//" /etc/locale.gen
 locale-gen
 echo LANG=$LANG > /etc/locale.conf
 
 echo $HOSTNAME > /etc/hostname
 
+cat >>/etc/hosts <<EOL
+127.0.0.1    localhost
+::1    localhost
+EOL
+
 pacman -S --noconfirm grub
 grub-install --target=i386-pc --recheck /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
-
-echo "root:$ROOT_PASSWORD" | chpasswd
 
 pacman -S --noconfirm intel-ucode
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -31,10 +36,13 @@ mkswap /swapfile
 echo "/swapfile none swap defaults 0 0" >> /etc/fstab
 echo "vm.swappiness=10" >> /etc/sysctl.d/99-sysctl.conf
 
-pacman -S --noconfirm base-devel python
-pacman -S --noconfirm xorg-server xorg-xinit xorg-apps
-pacman -S --noconfirm xf86-video-vesa xf86-input-mouse xf86-input-keyboard
-pacman -S --noconfirm openssh virtualbox-guest-utils virtualbox-guest-modules-arch
+pacman -S --noconfirm openssh
 
 systemctl enable dhcpcd.service
 systemctl enable sshd.service
+
+echo "root:$ROOT_PASSWORD" | chpasswd
+
+useradd -m --groups users,wheel $USER_NAME
+echo "$USER_NAME:$USER_PASSWORD" | chpasswd
+echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel
