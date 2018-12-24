@@ -1,6 +1,0 @@
----
-- name: install git with pacman
-  tags: git
-  pacman:
-    name: "git"
-    state: present

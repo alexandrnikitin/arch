@@ -1,6 +1,0 @@
----
-- name: install gvfs plugins
-  tags: gvfs
-  pacman:
-    name: "gvfs,gvfs-afc,gvfs-goa,gvfs-google,gvfs-gphoto2,gvfs-mtp,gvfs-nfs,gvfs-smb"
-    state: present

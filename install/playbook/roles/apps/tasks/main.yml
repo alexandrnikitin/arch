@@ -1,5 +1,0 @@
----
-- include: virtualbox.yml
-- include: git.yml
-- include: docker.yml
-- include: tools.yml
